@@ -414,6 +414,9 @@ td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
 td .sub{display:block;font-size:12px;color:var(--muted)}
 td .sub.obj{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;text-overflow:ellipsis;word-break:break-word;max-width:520px;margin-top:2px;line-height:1.4}
 td.td-int{min-width:260px}
+td.td-ctr{white-space:nowrap}
+.ctr{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-weight:600;color:var(--info)}
+.ctr-vazio{color:var(--muted)}
 @media (max-width:1500px){.mes-side,.mes-tab{grid-column:span 12}}
 @media (max-width:760px){td .sub.obj{-webkit-line-clamp:2;max-width:none}td.td-int{min-width:0}.ptag{white-space:normal;max-width:100%}}
 tr.click{cursor:pointer}
@@ -747,6 +750,7 @@ body.locked .app{display:none}
   table.rt td.rt-1{grid-column:1/-1}table.rt td.rt-1::before{display:none}
   table.rt td.td-int{grid-column:1/-1}
   table.rt td:empty{display:none}
+  table.rt td.td-ctr:has(.ctr-vazio){display:none}
   table.rt tr.selr{background:color-mix(in srgb,var(--accent) 6%,var(--card))}
   table.rt tr.selr td{background:transparent}
   table.rt td.tdx{position:absolute;right:10px;top:8px;width:auto}
@@ -978,7 +982,7 @@ function selSit(p){
   if(!pode('editar')) return pill(p.situacao||'andamento');
   return '<select class="inl" data-setsit="'+p.id+'" aria-label="Situação do processo '+h(p.numero)+'" style="color:'+SIT[p.situacao||'andamento'].c+';font-weight:700">'+SITK.map(s=>'<option value="'+s+'"'+(s===(p.situacao||'andamento')?' selected':'')+'>'+SIT[s].l+'</option>').join('')+'</select>';
 }
-function tagsProc(p){ const t=[]; if(p.modalidade||p.numMod) t.push('<span class="ptag" style="--c:var(--accent)" title="'+h(modNome(p)+(p.fundamento?' · '+p.fundamento:''))+'">'+h(p.numMod||'s/ nº')+(p.modalidade?' <i>'+h(modNome(p,true))+'</i>':'')+'</span>'); if(p.contrato) t.push('<span class="ptag" style="--c:var(--info)">Contrato '+h(p.contrato)+'</span>'); if(p.secretaria) t.push('<span class="ptag" style="--c:var(--ok)" title="'+h(p.secretaria)+'">'+h(secCurta(p.secretaria))+'</span>'); return t.length?'<span class="ptags">'+t.join('')+'</span>':''; }
+function tagsProc(p){ const t=[]; if(p.modalidade||p.numMod) t.push('<span class="ptag" style="--c:var(--accent)" title="'+h(modNome(p)+(p.fundamento?' · '+p.fundamento:''))+'">'+h(p.numMod||'s/ nº')+(p.modalidade?' <i>'+h(modNome(p,true))+'</i>':'')+'</span>'); if(p.secretaria) t.push('<span class="ptag" style="--c:var(--ok)" title="'+h(p.secretaria)+'">'+h(secCurta(p.secretaria))+'</span>'); return t.length?'<span class="ptags">'+t.join('')+'</span>':''; }
 function tabela(L,comMes){
   if(!L.length) return '<div class="empty">Nenhum processo encontrado.</div>';
   const ids=L.map(p=>p.id); [...S.sel].forEach(i=>{ if(!S.proc[i]||S.proc[i].excluido) S.sel.delete(i); });
@@ -986,8 +990,8 @@ function tabela(L,comMes){
   const barra = pode('excluir')&&nSel ? '<div class="selbar"><b>'+nSel+' selecionado'+(nSel>1?'s':'')+'</b>'+
       (S.lxConf==='sel'?'<span class="selq">Mover '+nSel+' processo'+(nSel>1?'s':'')+' para a lixeira?</span><button class="btn danger" data-act="lx-sel-ok">'+I.lixeira+'Excluir</button><button class="btn ghost" data-act="lx-no">Cancelar</button>'
        :'<span class="spacer"></span><button class="btn ghost" data-act="sel-clear">Limpar seleção</button><button class="btn danger" data-act="lx-sel">'+I.lixeira+'Excluir selecionados</button>')+'</div>' : '';
-  return barra+'<div class="tbl-wrap"><table><thead><tr><th>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-selall="'+ids.join(',')+'"'+(tudo?' checked':'')+' aria-label="Selecionar todos"> ')+'Processo</th><th>Data</th><th>Interessado</th><th>Responsável</th><th>Situação</th>'+(!pode('excluir')?'':'<th><span class="sr">Excluir</span></th>')+'</tr></thead><tbody>'+
-    L.map(p=>'<tr class="click'+(S.sel.has(p.id)?' selr':'')+'" data-open="'+p.id+'" tabindex="0"><td>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-sel="'+p.id+'"'+(S.sel.has(p.id)?' checked':'')+' aria-label="Selecionar processo '+h(p.numero)+'"> ')+'<span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int"><b style="font-weight:500">'+h(p.interessado)+'</b>'+((p.anexos||[]).length?'<span class="clipn" title="'+(p.anexos.length)+' anexo(s)">'+I.clip+p.anexos.length+'</span>':'')+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td>'+selResp(p)+'</td><td>'+selSit(p)+'</td>'+
+  return barra+'<div class="tbl-wrap"><table><thead><tr><th>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-selall="'+ids.join(',')+'"'+(tudo?' checked':'')+' aria-label="Selecionar todos"> ')+'Processo</th><th>Data</th><th>Interessado</th><th>Contrato</th><th>Responsável</th><th>Situação</th>'+(!pode('excluir')?'':'<th><span class="sr">Excluir</span></th>')+'</tr></thead><tbody>'+
+    L.map(p=>'<tr class="click'+(S.sel.has(p.id)?' selr':'')+'" data-open="'+p.id+'" tabindex="0"><td>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-sel="'+p.id+'"'+(S.sel.has(p.id)?' checked':'')+' aria-label="Selecionar processo '+h(p.numero)+'"> ')+'<span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int"><b style="font-weight:500">'+h(p.interessado)+'</b>'+((p.anexos||[]).length?'<span class="clipn" title="'+(p.anexos.length)+' anexo(s)">'+I.clip+p.anexos.length+'</span>':'')+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td class="td-ctr">'+(p.contrato?'<span class="ctr">'+h(p.contrato)+'</span>':'<span class="ctr-vazio">—</span>')+'</td><td>'+selResp(p)+'</td><td>'+selSit(p)+'</td>'+
       (!pode('excluir')?'':'<td class="tdx">'+(S.lxConf===p.id?'<span class="rowq">Excluir? <button class="btn danger sm" data-act="lx-one-ok" data-id="'+p.id+'">Sim</button><button class="btn ghost sm" data-act="lx-no">Não</button></span>':'<button class="trash" data-act="lx-one" data-id="'+p.id+'" title="Excluir processo nº '+h(p.numero)+'" aria-label="Excluir processo nº '+h(p.numero)+'">'+I.lixeira+'</button>')+'</td>')+'</tr>').join('')+
     '</tbody></table></div>';
 }
@@ -1765,8 +1769,8 @@ function vRelatorios(){
     (D.mods.length?'<div class="tbl-wrap"><table class="rp-tab"><thead><tr><th>Modalidade</th><th class="num">Processos</th><th class="num">Concluídos</th><th class="num">Em aberto</th><th class="num">Contratos</th></tr></thead><tbody>'+D.mods.map(x=>'<tr><td>'+h(x.nome)+'</td><td class="num"><b>'+x.t+'</b></td><td class="num">'+x.concluido+'</td><td class="num">'+x.aberto+'</td><td class="num">'+x.contratos+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">Nenhum processo no período com esses filtros.</div>')+
   '</section>'+
   '<section class="card span-12"><div class="card-h"><span class="badge-ico" style="--c:var(--accent)">'+I.todos+'</span><h2>Processos do relatório</h2><span class="count">'+D.L.length+'</span></div>'+
-    (D.L.length?'<div class="tbl-wrap"><table><thead><tr><th>Processo</th><th>Data</th><th>Interessado</th><th>Responsável</th><th>Situação</th><th>Conclusão</th></tr></thead><tbody>'+
-      D.L.map(p=>'<tr class="click" data-open="'+p.id+'" tabindex="0"><td><span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int">'+h(p.interessado)+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td>'+h(respNome(p.responsavel)||'—')+'</td><td>'+pill(p.situacao||'andamento')+'</td><td class="mono">'+(p.conclusao?br(p.conclusao)+(p.situacao==='concluido'?'<span class="sub">'+fmtDias(diasEntre(p.data,p.conclusao))+'</span>':''):'—')+'</td></tr>').join('')+
+    (D.L.length?'<div class="tbl-wrap"><table><thead><tr><th>Processo</th><th>Data</th><th>Interessado</th><th>Contrato</th><th>Responsável</th><th>Situação</th><th>Conclusão</th></tr></thead><tbody>'+
+      D.L.map(p=>'<tr class="click" data-open="'+p.id+'" tabindex="0"><td><span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int">'+h(p.interessado)+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td class="td-ctr">'+(p.contrato?'<span class="ctr">'+h(p.contrato)+'</span>':'<span class="ctr-vazio">—</span>')+'</td><td>'+h(respNome(p.responsavel)||'—')+'</td><td>'+pill(p.situacao||'andamento')+'</td><td class="mono">'+(p.conclusao?br(p.conclusao)+(p.situacao==='concluido'?'<span class="sub">'+fmtDias(diasEntre(p.data,p.conclusao))+'</span>':''):'—')+'</td></tr>').join('')+
       '</tbody></table></div>':'<div class="empty">Nenhum processo no período com esses filtros.</div>')+
   '</section></div>'+
   '<section class="card"><div class="card-h"><span class="badge-ico" style="--c:var(--info)">'+I.historico+'</span><h2>Relatórios prontos</h2></div><div class="card-b rp-prontos">'+
