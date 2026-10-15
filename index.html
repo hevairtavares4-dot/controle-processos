@@ -355,8 +355,8 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .mb-year{border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--card)}
 
 .grid{display:grid;gap:18px;grid-template-columns:repeat(12,minmax(0,1fr))}
-.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
-@media (max-width:1100px){.span-4,.span-5,.span-7,.span-8{grid-column:span 12}}
+.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-12{grid-column:span 12}
+@media (max-width:1100px){.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 12}}
 .card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid color-mix(in srgb,var(--line) 70%,transparent);display:flex;flex-direction:column;min-width:0}
 .card-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .card-h h2{font-size:16px;font-weight:700;flex:1;min-width:0}
@@ -407,11 +407,15 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 
 /* tabela */
-.tbl-wrap{overflow-x:auto}
+.tbl-wrap{overflow-x:auto;position:relative}
 table{width:100%;border-collapse:collapse}
 th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--soft);padding:9px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
 td .sub{display:block;font-size:12px;color:var(--muted)}
+td .sub.obj{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;text-overflow:ellipsis;word-break:break-word;max-width:520px;margin-top:2px;line-height:1.4}
+td.td-int{min-width:260px}
+@media (max-width:1500px){.mes-side,.mes-tab{grid-column:span 12}}
+@media (max-width:760px){td .sub.obj{-webkit-line-clamp:2;max-width:none}td.td-int{min-width:0}.ptag{white-space:normal;max-width:100%}}
 tr.click{cursor:pointer}
 tr.click:hover td{background:var(--soft)}
 .num{text-align:right;font-variant-numeric:tabular-nums}
@@ -521,6 +525,12 @@ textarea{width:100%;resize:vertical;min-height:70px}
 .perm .me{display:flex;align-items:center;gap:12px;flex:1;min-width:200px}.perm .me b{display:block}
 .cfg-me{display:flex;align-items:center;gap:12px;flex:1;min-width:200px}.cfg-me .av{width:42px;height:42px;font-size:15px}.cfg-me b{display:block;font-size:15px}.cfg-me small{color:var(--muted);font-size:12.5px}
 @media (max-width:640px){.perm th.pa,.perm td.pa{display:none}.perm td.pc,.perm th.pc{width:58px;padding-inline:2px}.perm th.pc{font-size:11px}.perm th:first-child,.perm td:first-child{min-width:0!important;padding-left:10px}.perm .sw{transform:scale(.9)}}
+.sec-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 12px}
+.sec-it{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.sec-it span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.sec-it small{font-size:11.5px;white-space:nowrap}
+.sec-it .linkbtn:disabled{opacity:.3;cursor:default}
+.sec-add{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.sec-add input{flex:1;min-width:200px}
 .cfg-mail{display:inline-block;font-size:13px;background:var(--soft);border-radius:8px;padding:3px 8px;margin:2px 4px 2px 0;word-break:break-all}
 @media (max-width:900px){.cfg-wrap{grid-template-columns:1fr}}
 .note{font-size:13px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px}
@@ -614,7 +624,8 @@ body.locked .app{display:none}
 .rp-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .rp-chip:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .rp-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.rp-fields label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:500;color:var(--muted)}
+.rp-fields label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:500;color:var(--muted);min-width:0}
+.rp-fields select,.rp-fields input{width:100%;min-width:0}
 .rp-fields label > *{color:var(--ink);font-size:14px;font-weight:400}
 .rp-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:14px}
 .rp-actions .spacer{flex:1}
@@ -659,6 +670,12 @@ body.locked .app{display:none}
 .anx-a{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap;min-width:200px}
 .spin{width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent);animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
+.ptags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.ptag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;line-height:1;padding:4px 7px;border-radius:6px;background:color-mix(in srgb,var(--c,var(--side)) 10%,transparent);color:var(--c,var(--side));white-space:nowrap}
+.ptag i{font-style:normal;font-weight:500;opacity:.8}
+.form .sub-h{grid-column:1/-1;display:flex;align-items:center;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink)}
+.form .sub-h small{font-weight:500;color:var(--muted)}
+.hint{font-size:12px;color:var(--warn);font-weight:500}
 .clipn{display:inline-flex;align-items:center;gap:2px;margin-left:8px;font-size:11.5px;font-weight:700;color:var(--muted);vertical-align:1px}
 .clipn svg{width:13px;height:13px}
 .viewer{position:fixed;inset:0;z-index:70;background:rgba(6,25,33,.85);display:flex;flex-direction:column}
@@ -728,6 +745,7 @@ body.locked .app{display:none}
   table.rt td{display:block;padding:0;border:0;min-width:0;text-align:left!important}
   table.rt td[data-l]::before{content:attr(data-l);display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:2px}
   table.rt td.rt-1{grid-column:1/-1}table.rt td.rt-1::before{display:none}
+  table.rt td.td-int{grid-column:1/-1}
   table.rt td:empty{display:none}
   table.rt tr.selr{background:color-mix(in srgb,var(--accent) 6%,var(--card))}
   table.rt tr.selr td{background:transparent}
@@ -797,6 +815,35 @@ const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agos
 const MES3=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
 const SIT={andamento:{l:'Em andamento',c:'var(--info)'},aguardando:{l:'Aguardando',c:'var(--warn)'},concluido:{l:'Concluído',c:'var(--ok)'},cancelado:{l:'Cancelado',c:'var(--gray)'}};
 const SITK=['andamento','aguardando','concluido','cancelado'];
+/* Classificação conforme a Lei 14.133/2021 */
+const MODS=[
+  {k:'pregao',l:'Pregão',g:'Licitação (art. 28)',pre:{eletronica:'PE',presencial:'PP'},forma:true},
+  {k:'concorrencia',l:'Concorrência',g:'Licitação (art. 28)',pre:{eletronica:'CE',presencial:'CP'},forma:true},
+  {k:'concurso',l:'Concurso',g:'Licitação (art. 28)',pre:'CS',forma:true},
+  {k:'leilao',l:'Leilão',g:'Licitação (art. 28)',pre:'LE',forma:true},
+  {k:'dialogo',l:'Diálogo competitivo',g:'Licitação (art. 28)',pre:'DC',forma:true},
+  {k:'dispensa',l:'Dispensa de licitação',c:'Dispensa',g:'Contratação direta (arts. 72 a 75)',pre:'DL',forma:true},
+  {k:'inexigibilidade',l:'Inexigibilidade',g:'Contratação direta (arts. 72 a 75)',pre:'IN',forma:false},
+  {k:'credenciamento',l:'Credenciamento',g:'Procedimentos auxiliares (art. 78)',pre:'CR',forma:false},
+  {k:'adesao',l:'Adesão a ata de registro de preços',c:'Adesão a ata',g:'Procedimentos auxiliares (art. 78)',pre:'AD',forma:false},
+  {k:'outro',l:'Outra',g:'Outros',pre:'',forma:false},
+];
+const MODK=Object.fromEntries(MODS.map(m=>[m.k,m]));
+const FORMAS={eletronica:'Eletrônica',presencial:'Presencial'};
+const FUND={
+  inexigibilidade:['Art. 74, I – fornecedor exclusivo','Art. 74, II – profissional do setor artístico','Art. 74, III – serviço técnico especializado (notória especialização)','Art. 74, IV – objeto contratado por credenciamento','Art. 74, V – aquisição ou locação de imóvel'],
+  dispensa:['Art. 75, I – obras e serviços de engenharia (valor)','Art. 75, II – compras e outros serviços (valor)','Art. 75, III – licitação deserta ou fracassada','Art. 75, VIII – emergência ou calamidade pública'],
+  credenciamento:['Art. 79, I – contratação paralela e não excludente','Art. 79, II – escolha pelo beneficiário direto','Art. 79, III – mercados fluidos'],
+  adesao:['Art. 86, § 2º – adesão por órgão não participante']
+};
+const SEC_PADRAO=[];
+function secSugestoes(){ return [...new Set([...secretarias(),...Object.values(S.proc).map(p=>p.secretaria).filter(Boolean)])].sort((a,b)=>a.localeCompare(b,'pt-BR')); }
+function secretarias(){ const L=S.config&&Array.isArray(S.config.secretarias)?S.config.secretarias:SEC_PADRAO; return L.filter(x=>typeof x==='string'&&x.trim()); }
+function secCurta(n){ return String(n||'').replace(/^Secretaria (Municipal )?(de |da |do |das |dos )?/i,''); }
+function prefixoMod(k,forma){ const m=MODK[k]; if(!m||!m.pre) return ''; return typeof m.pre==='string'?m.pre:(m.pre[forma]||m.pre.eletronica); }
+function modNome(p,curto){ const m=MODK[p&&p.modalidade]; if(!m) return ''; const n=curto&&m.c?m.c:m.l; if(!m.forma||!p.forma) return n; const fem=m.k==='concorrencia'||m.k==='dispensa'; return n+' '+(p.forma==='presencial'?'presencial':(fem?'eletrônica':'eletrônico')); }
+function modTxt(p){ return [p.numMod,modNome(p,true)].filter(Boolean).join(' · '); }
+function buscaTxt(p){ return [p.numero,p.interessado,p.assunto,respNome(p.responsavel),br(p.data),p.numMod,modNome(p),p.contrato,p.contrato?'contrato '+p.contrato:'',p.fundamento,p.secretaria].join(' ').toLowerCase(); }
 const CORES=['#0f6e8c','#7a4fb5','#2f8f5b','#b5562b','#3a5fb5','#a2407a','#8a6d1b','#c23b5a','#3f7f86','#5b6472'];
 const I={
   mes:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg>',
@@ -931,6 +978,7 @@ function selSit(p){
   if(!pode('editar')) return pill(p.situacao||'andamento');
   return '<select class="inl" data-setsit="'+p.id+'" aria-label="Situação do processo '+h(p.numero)+'" style="color:'+SIT[p.situacao||'andamento'].c+';font-weight:700">'+SITK.map(s=>'<option value="'+s+'"'+(s===(p.situacao||'andamento')?' selected':'')+'>'+SIT[s].l+'</option>').join('')+'</select>';
 }
+function tagsProc(p){ const t=[]; if(p.modalidade||p.numMod) t.push('<span class="ptag" style="--c:var(--accent)" title="'+h(modNome(p)+(p.fundamento?' · '+p.fundamento:''))+'">'+h(p.numMod||'s/ nº')+(p.modalidade?' <i>'+h(modNome(p,true))+'</i>':'')+'</span>'); if(p.contrato) t.push('<span class="ptag" style="--c:var(--info)">Contrato '+h(p.contrato)+'</span>'); if(p.secretaria) t.push('<span class="ptag" style="--c:var(--ok)" title="'+h(p.secretaria)+'">'+h(secCurta(p.secretaria))+'</span>'); return t.length?'<span class="ptags">'+t.join('')+'</span>':''; }
 function tabela(L,comMes){
   if(!L.length) return '<div class="empty">Nenhum processo encontrado.</div>';
   const ids=L.map(p=>p.id); [...S.sel].forEach(i=>{ if(!S.proc[i]||S.proc[i].excluido) S.sel.delete(i); });
@@ -939,14 +987,14 @@ function tabela(L,comMes){
       (S.lxConf==='sel'?'<span class="selq">Mover '+nSel+' processo'+(nSel>1?'s':'')+' para a lixeira?</span><button class="btn danger" data-act="lx-sel-ok">'+I.lixeira+'Excluir</button><button class="btn ghost" data-act="lx-no">Cancelar</button>'
        :'<span class="spacer"></span><button class="btn ghost" data-act="sel-clear">Limpar seleção</button><button class="btn danger" data-act="lx-sel">'+I.lixeira+'Excluir selecionados</button>')+'</div>' : '';
   return barra+'<div class="tbl-wrap"><table><thead><tr><th>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-selall="'+ids.join(',')+'"'+(tudo?' checked':'')+' aria-label="Selecionar todos"> ')+'Processo</th><th>Data</th><th>Interessado</th><th>Responsável</th><th>Situação</th>'+(!pode('excluir')?'':'<th><span class="sr">Excluir</span></th>')+'</tr></thead><tbody>'+
-    L.map(p=>'<tr class="click'+(S.sel.has(p.id)?' selr':'')+'" data-open="'+p.id+'" tabindex="0"><td>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-sel="'+p.id+'"'+(S.sel.has(p.id)?' checked':'')+' aria-label="Selecionar processo '+h(p.numero)+'"> ')+'<span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td><b style="font-weight:500">'+h(p.interessado)+'</b>'+((p.anexos||[]).length?'<span class="clipn" title="'+(p.anexos.length)+' anexo(s)">'+I.clip+p.anexos.length+'</span>':'')+(p.assunto?'<span class="sub">'+h(p.assunto)+'</span>':'')+'</td><td>'+selResp(p)+'</td><td>'+selSit(p)+'</td>'+
+    L.map(p=>'<tr class="click'+(S.sel.has(p.id)?' selr':'')+'" data-open="'+p.id+'" tabindex="0"><td>'+(!pode('excluir')?'':'<input type="checkbox" class="ck" data-sel="'+p.id+'"'+(S.sel.has(p.id)?' checked':'')+' aria-label="Selecionar processo '+h(p.numero)+'"> ')+'<span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int"><b style="font-weight:500">'+h(p.interessado)+'</b>'+((p.anexos||[]).length?'<span class="clipn" title="'+(p.anexos.length)+' anexo(s)">'+I.clip+p.anexos.length+'</span>':'')+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td>'+selResp(p)+'</td><td>'+selSit(p)+'</td>'+
       (!pode('excluir')?'':'<td class="tdx">'+(S.lxConf===p.id?'<span class="rowq">Excluir? <button class="btn danger sm" data-act="lx-one-ok" data-id="'+p.id+'">Sim</button><button class="btn ghost sm" data-act="lx-no">Não</button></span>':'<button class="trash" data-act="lx-one" data-id="'+p.id+'" title="Excluir processo nº '+h(p.numero)+'" aria-label="Excluir processo nº '+h(p.numero)+'">'+I.lixeira+'</button>')+'</td>')+'</tr>').join('')+
     '</tbody></table></div>';
 }
 function vMes(){
   const all=lista().filter(p=>mk(p.data)===S.mes).sort((a,b)=>(+a.numero||0)-(+b.numero||0));
   const k=contar(all); const f=S.f, q=f.q.trim().toLowerCase();
-  const F=all.filter(p=>(!f.st||(f.st==='sem'?!p.responsavel:(p.situacao||'andamento')===f.st))&&(!f.r||(f.r==='_'?!p.responsavel:p.responsavel===f.r))&&(!q||[p.numero,p.interessado,p.assunto,respNome(p.responsavel)].join(' ').toLowerCase().includes(q)));
+  const F=all.filter(p=>(!f.st||(f.st==='sem'?!p.responsavel:(p.situacao||'andamento')===f.st))&&(!f.r||(f.r==='_'?!p.responsavel:p.responsavel===f.r))&&(!f.mod||(f.mod==='_'?!p.modalidade:p.modalidade===f.mod))&&(!f.sec||(f.sec==='_'?!p.secretaria:p.secretaria===f.sec))&&(!q||buscaTxt(p).includes(q)));
   const por={}; all.forEach(p=>{ const r=p.responsavel||'_'; por[r]=por[r]||{andamento:0,aguardando:0,concluido:0,cancelado:0,t:0}; por[r][p.situacao||'andamento']++; por[r].t++; });
   const rows=Object.entries(por).sort((a,b)=>b[1].t-a[1].t||(a[0]==='_'?1:b[0]==='_'?-1:respNome(a[0]).localeCompare(respNome(b[0]),'pt-BR')));
   const max=Math.max(1,...rows.map(r=>r[1].t));
@@ -955,12 +1003,12 @@ function vMes(){
   monthbar()+
   '<div class="kpis">'+kp('',k.total,'Processos no mês','var(--side)',all.length?'nº '+Math.min(...all.map(p=>+p.numero||0))+' a '+Math.max(...all.map(p=>+p.numero||0)):'')+kp('concluido',k.concluido,'Concluídos','var(--ok)')+kp('andamento',k.andamento,'Em andamento','var(--info)')+kp('aguardando',k.aguardando,'Aguardando','var(--warn)')+kp('sem',k.sem,'Sem responsável',k.sem?'var(--bad)':'var(--gray)')+'</div>'+
   '<div class="grid">'+
-  '<section class="card span-4"><div class="card-h"><span class="badge-ico" style="--c:var(--side)">'+I.responsaveis+'</span><h2>Quem fez</h2><span class="count">'+rows.filter(r=>r[0]!=='_').length+'</span></div><div class="card-b">'+
+  '<section class="card span-4 mes-side"><div class="card-h"><span class="badge-ico" style="--c:var(--side)">'+I.responsaveis+'</span><h2>Quem fez</h2><span class="count">'+rows.filter(r=>r[0]!=='_').length+'</span></div><div class="card-b">'+
     (rows.length?'<div class="legend">'+SITK.map(s=>'<span><i style="background:'+SIT[s].c+'"></i>'+SIT[s].l+'</span>').join('')+'</div><div class="rbars">'+rows.map(([r,v])=>'<button class="rbar'+(f.r===r?' on':'')+'" data-fr="'+r+'"><span class="nm"><i class="dot" style="background:'+(r==='_'?'var(--line)':h(respCor(r)))+'"></i><span>'+(r==='_'?'Sem responsável':h(respNome(r)))+'</span></span><span class="ct"><b>'+v.t+'</b> processo'+(v.t>1?'s':'')+'</span><span class="bar" style="width:'+(v.t/max*100)+'%">'+SITK.map(s=>v[s]?'<span style="flex:'+v[s]+';background:'+SIT[s].c+'" title="'+SIT[s].l+': '+v[s]+'"></span>':'').join('')+'</span></button>').join('')+'</div>'
       :'<div class="empty">Nenhum processo neste mês.</div>')+
   '</div></section>'+
-  '<section class="card span-8"><div class="card-h"><span class="badge-ico" style="--c:var(--accent)">'+I.todos+'</span><h2>Processos de '+h(MESES[+S.mes.slice(5)-1])+'</h2><span class="count">'+F.length+(F.length!==all.length?' de '+all.length:'')+'</span>'+((f.st||f.r||f.q)?'<button class="linkbtn" data-act="limpar">Limpar filtros</button>':'')+'</div>'+
-    '<div class="filters"><input type="text" id="fq" placeholder="Filtrar por nº ou interessado" value="'+h(f.q)+'"><select id="fr" aria-label="Responsável"><option value="">Todos os responsáveis</option><option value="_"'+(f.r==='_'?' selected':'')+'>Sem responsável</option>'+respList(true).map(r=>'<option value="'+r.id+'"'+(f.r===r.id?' selected':'')+'>'+h(r.nome)+'</option>').join('')+'</select></div>'+
+  '<section class="card span-8 mes-tab"><div class="card-h"><span class="badge-ico" style="--c:var(--accent)">'+I.todos+'</span><h2>Processos de '+h(MESES[+S.mes.slice(5)-1])+'</h2><span class="count">'+F.length+(F.length!==all.length?' de '+all.length:'')+'</span>'+((f.st||f.r||f.q)?'<button class="linkbtn" data-act="limpar">Limpar filtros</button>':'')+'</div>'+
+    '<div class="filters"><input type="text" id="fq" placeholder="Filtrar por nº, interessado, secretaria ou contrato" value="'+h(f.q)+'">'+selModFiltro('fmod',f.mod)+selSecFiltro('fsec',f.sec)+'<select id="fr" aria-label="Responsável"><option value="">Todos os responsáveis</option><option value="_"'+(f.r==='_'?' selected':'')+'>Sem responsável</option>'+respList(true).map(r=>'<option value="'+r.id+'"'+(f.r===r.id?' selected':'')+'>'+h(r.nome)+'</option>').join('')+'</select></div>'+
     tabela(F)+
   '</section></div>';
 }
@@ -1017,9 +1065,9 @@ function vResp(){
 /* ===================== Tela: Todos ===================== */
 function vTodos(){
   const q=S.tq.trim().toLowerCase();
-  const F=lista().filter(p=>!q||[p.numero,p.interessado,p.assunto,respNome(p.responsavel),br(p.data)].join(' ').toLowerCase().includes(q)).sort((a,b)=>(+b.numero||0)-(+a.numero||0));
+  const F=lista().filter(p=>!q||buscaTxt(p).includes(q)).sort((a,b)=>(+b.numero||0)-(+a.numero||0));
   return head('todos',!pode('criar')?'':'<button class="btn primary" data-act="novo">'+I.plus+'Novo processo</button>')+
-  '<section class="card"><div class="filters"><input type="text" id="tq" placeholder="Buscar por nº, interessado, responsável ou data" value="'+h(S.tq)+'"><span class="count">'+F.length+'</span></div>'+tabela(F)+'</section>';
+  '<section class="card"><div class="filters"><input type="text" id="tq" placeholder="Buscar por nº, interessado, modalidade, contrato ou data" value="'+h(S.tq)+'"><span class="count">'+F.length+'</span></div>'+tabela(F)+'</section>';
 }
 
 /* ===================== Tela: Configurações ===================== */
@@ -1044,6 +1092,13 @@ function vConfig(){
   html+=cfgCard('relogio','var(--warn)','Processos',
     '<div class="form"><label class="c3">Processo parado depois de<span style="display:flex;align-items:center;gap:8px"><input type="number" id="cf_dias" min="1" max="365" value="'+h(D.diasParado)+'" style="width:96px"'+dis+'><span class="muted" style="font-size:14px">dias em aberto</span></span></label>'+
     '<p class="c6 note" style="margin:0">Processos <b>em andamento</b> ou <b>aguardando</b> há mais tempo que isso aparecem na lista de parados dos <b>Relatórios</b>.</p></div>',soAdm);
+  { const SL=secretarias(); const uso={}; lista().forEach(p=>{ if(p.secretaria) uso[p.secretaria]=(uso[p.secretaria]||0)+1; });
+    html+=cfgCard('predio','var(--ok)','Secretarias',
+      '<p class="muted" style="margin:0 0 10px;font-size:12.5px">No processo, a secretaria é <b>escrita</b> por quem registra. Os nomes daqui (e os já usados em outros processos) aparecem como sugestão enquanto a pessoa digita, para manter a escrita igual. Remover da lista não muda os processos.</p>'+
+      (SL.length?'':'<div class="note">Nenhuma secretaria cadastrada. '+(adm?'Escreva abaixo o nome oficial de cada uma.':'')+'</div>')+
+      '<div class="sec-list">'+SL.map((x,i)=>'<div class="sec-it"><span>'+h(x)+'</span><small class="muted">'+(uso[x]?uso[x]+' processo'+(uso[x]>1?'s':''):'')+'</small>'+(adm?'<button class="linkbtn" data-act="sec-up" data-i="'+i+'" title="Subir"'+(i?'':' disabled')+' aria-label="Subir '+h(x)+'">▲</button><button class="linkbtn" style="color:var(--bad)" data-act="sec-rm" data-i="'+i+'" aria-label="Remover '+h(x)+'">Remover</button>':'')+'</div>').join('')+'</div>'+
+      (adm?'<div class="sec-add"><input type="text" id="secNova" placeholder="Ex.: Secretaria de Turismo" maxlength="90"><button class="btn primary" data-act="sec-add">'+I.plus+'Adicionar</button></div>':''),soAdm,'full');
+  }
   if(D.sujo&&adm) html+='<div class="cfg-bar full"><b>Há alterações não salvas.</b><button class="btn ghost" data-act="cfg-cancelar">Descartar</button><button class="btn primary" data-act="cfg-salvar">'+I.check+'Salvar alterações</button></div>';
   // Acesso
   if(S.fb){
@@ -1107,6 +1162,7 @@ async function mudarPermissao(pf,acao,valor){
   const P=permissoes(); P[pf][acao]=valor;
   try{ await put('config','geral',{...S.config,permissoes:P}); render(); toast(PERFIS[pf].l+': '+ACOES.find(x=>x[0]===acao)[1].toLowerCase()+(valor?' — liberado.':' — bloqueado.')); }catch(e){ render(); }
 }
+async function salvarSecretarias(L,msg){ if(!isAdmin()){ negar(); return; } try{ await put('config','geral',{...S.config,secretarias:L}); render(); if(msg) toast(msg); }catch(e){ render(); } }
 async function mudarCadastro(aberto){
   try{ await put('config','geral',{...S.config,cadastroAberto:aberto}); render(); toast(aberto?'Cadastros abertos.':'Cadastros fechados.'); }catch(e){ render(); }
 }
@@ -1507,6 +1563,15 @@ function renderModal(){
       '<label class="c2">Responsável<select id="p_responsavel"'+dis+'><option value="">Sem responsável</option>'+respList(true).filter(r=>r.ativo!==false||r.id===p.responsavel).map(r=>'<option value="'+r.id+'"'+(r.id===p.responsavel?' selected':'')+'>'+h(r.nome)+'</option>').join('')+'</select></label>'+
       '<label class="c6">Interessado (empresa ou pessoa) *<input type="text" id="p_interessado" value="'+h(p.interessado)+'"'+dis+' placeholder="Ex.: Castro Soluções Integradas Ltda"></label>'+
       '<label class="c6">Assunto / objeto<input type="text" id="p_assunto" value="'+h(p.assunto||'')+'"'+dis+' placeholder="Ex.: Solicitação de cadastro de fornecedor"></label>'+
+      (()=>{ const m=MODK[p.modalidade]; const pre=prefixoMod(p.modalidade,p.forma); const ano=(p.data||hoje()).slice(0,4);
+        return '<div class="sub-h">Classificação <small>Lei 14.133/2021</small></div>'+
+        '<label class="c4">Secretaria requisitante<input type="text" id="p_secretaria" value="'+h(p.secretaria||'')+'"'+dis+' list="secList" maxlength="90" autocomplete="off" placeholder="Escreva o nome da secretaria"><datalist id="secList">'+secSugestoes().map(x=>'<option value="'+h(x)+'">').join('')+'</datalist></label>'+
+        '<label class="c2">Nº do contrato<input type="text" id="p_contrato" value="'+h(p.contrato||'')+'"'+dis+' placeholder="Ex.: 045/'+ano+'"></label>'+
+        '<label class="c2">Modalidade<select id="p_modalidade"'+dis+'><option value="">Não informada</option>'+[...new Set(MODS.map(x=>x.g))].map(g=>'<optgroup label="'+h(g)+'">'+MODS.filter(x=>x.g===g).map(x=>'<option value="'+x.k+'"'+(x.k===p.modalidade?' selected':'')+'>'+h(x.l)+'</option>').join('')+'</optgroup>').join('')+'</select></label>'+
+        (m&&m.forma?'<label class="c2">Forma<select id="p_forma"'+dis+'>'+(m.k==='dispensa'?'<option value="">Não informada</option>':'')+Object.entries(FORMAS).map(([k,l])=>'<option value="'+k+'"'+(k===(p.forma||(m.k==='dispensa'?'':'eletronica'))?' selected':'')+'>'+l+'</option>').join('')+'</select></label>':'')+
+        '<label class="'+(m&&m.forma?'c2':'c4')+'">Nº da '+(m&&m.g.startsWith('Contrata')?(m.k==='dispensa'?'dispensa':'inexigibilidade'):'modalidade')+'<input type="text" id="p_numMod" value="'+h(p.numMod||'')+'"'+dis+' placeholder="'+h((pre?pre+' - ':'')+'001/'+ano)+'"></label>'+
+        '<label class="c6">Fundamento legal<input type="text" id="p_fundamento" value="'+h(p.fundamento||'')+'"'+dis+' list="fundList" placeholder="'+(FUND[p.modalidade]?'Escolha ou digite':'Ex.: Art. 28, I')+'" autocomplete="off"><datalist id="fundList">'+(FUND[p.modalidade]||[]).map(f=>'<option value="'+h(f)+'">').join('')+'</datalist></label>'+
+        (m&&m.forma&&p.forma==='presencial'&&m.k!=='dispensa'?'<p class="c6 hint" style="margin:-4px 0 0">Forma presencial precisa ser motivada, com a sessão registrada em ata e gravada em áudio e vídeo (art. 17, § 2º).</p>':''); })()+
       '<div class="c6"><span class="sec-t" style="display:block;margin-bottom:6px;font-size:12px;color:var(--muted);font-weight:500">Situação</span><div class="sitpick">'+SITK.map(s=>'<label><input type="radio" name="p_sit" value="'+s+'"'+(s===(p.situacao||'andamento')?' checked':'')+dis+'><span class="pill s-'+s+'">'+SIT[s].l+'</span></label>').join('')+'</div></div>'+
       ((p.situacao==='concluido'||p.situacao==='cancelado')?'<label class="c2">Data de '+(p.situacao==='concluido'?'conclusão':'cancelamento')+'<input type="date" id="p_conclusao" value="'+h(p.conclusao||hoje())+'"'+dis+'></label>':'')+
       '<label class="c6">Observações<textarea id="p_obs"'+dis+'>'+h(p.obs||'')+'</textarea></label>'+
@@ -1552,7 +1617,9 @@ function acessoBloco(M,r){
   return x+'<div class="perf-leg">'+Object.entries(PERFIS).map(([k,v])=>'<span><b>'+v.l+':</b> '+descPerfil(k)+'</span>').join('')+'</div></div>';
 }
 function coletarProc(){ const M=S.modal; if(!M||M.kind!=='proc') return; const p=M.d;
-  ['numero','data','responsavel','interessado','assunto','conclusao','obs'].forEach(k=>{ const el=document.getElementById('p_'+k); if(el) p[k]=k==='numero'?(+el.value||''):el.value.trim(); });
+  ['numero','data','responsavel','interessado','assunto','conclusao','obs','modalidade','forma','numMod','fundamento','contrato','secretaria'].forEach(k=>{ const el=document.getElementById('p_'+k); if(el) p[k]=k==='numero'?(+el.value||''):el.value.trim(); });
+  if(p.secretaria){ p.secretaria=p.secretaria.replace(/\s+/g,' ').trim(); const igual=secSugestoes().find(x=>x.toLowerCase()===p.secretaria.toLowerCase()); if(igual) p.secretaria=igual; }
+  const m=MODK[p.modalidade]; if(!m||!m.forma) p.forma=''; else if(!document.getElementById('p_forma')&&m.k!=='dispensa'&&!p.forma) p.forma='eletronica';
   const s=document.querySelector('input[name="p_sit"]:checked'); if(s) p.situacao=s.value; }
 function coletarResp(){ const M=S.modal; if(!M||M.kind!=='resp') return; const r=M.d;
   r.nome=(document.getElementById('r_nome').value||'').trim(); r.setor=(document.getElementById('r_setor').value||'').trim();
@@ -1572,7 +1639,7 @@ async function salvarProc(){
   else {
     if((old.responsavel||'')!==(p.responsavel||'')) H.push(logItem('Responsável: '+(respNome(old.responsavel)||'ninguém')+' → '+(respNome(p.responsavel)||'ninguém')+'.'));
     if((old.situacao||'andamento')!==p.situacao) H.push(logItem('Situação: '+SIT[old.situacao||'andamento'].l+' → '+SIT[p.situacao].l+'.'));
-    const camp=['numero','data','interessado','assunto','obs'].filter(k=>String(old[k]||'')!==String(p[k]||'')); if(camp.length) H.push(logItem('Dados alterados: '+camp.map(k=>({numero:'nº',data:'data',interessado:'interessado',assunto:'assunto',obs:'observações'}[k])).join(', ')+'.'));
+    const camp=['numero','data','interessado','assunto','obs','secretaria','modalidade','forma','numMod','fundamento','contrato'].filter(k=>String(old[k]||'')!==String(p[k]||'')); if(camp.length) H.push(logItem('Dados alterados: '+camp.map(k=>({numero:'nº',data:'data',interessado:'interessado',assunto:'assunto',obs:'observações',modalidade:'modalidade',forma:'forma',numMod:'nº da modalidade',fundamento:'fundamento legal',contrato:'nº do contrato',secretaria:'secretaria'}[k])).join(', ')+'.'));
   }
   p.historico=H.slice(-60); const id=M.id||newId('p');
   const pend=M.pend||[];
@@ -1614,7 +1681,7 @@ function pdfBase(titulo,sub,orient){
   const doc=new window.jspdf.jsPDF({orientation:orient||'portrait',unit:'mm',format:'a4'}); const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
   const now=new Date(); const emit=br(hoje())+' '+pad(now.getHours())+':'+pad(now.getMinutes());
   const header=()=>{ doc.setFillColor(15,60,76); doc.rect(0,0,W,24,'F'); doc.setFillColor(242,111,33); doc.rect(0,24,W,1.2,'F');
-    let x0=14; if(S.config.brasao&&/^data:image\/(png|jpeg)/.test(S.config.brasao)){ try{ doc.addImage(S.config.brasao,/jpeg/.test(S.config.brasao.slice(0,20))?'JPEG':'PNG',12,3,18,18); x0=33; }catch(e){} }
+    let x0=14; if(S.config.brasao&&/^data:image\/(png|jpeg)/.test(S.config.brasao)){ try{ doc.setFillColor(255,255,255); doc.roundedRect(13,3,18,18,2.5,2.5,'F'); const ip=doc.getImageProperties(S.config.brasao); const k=Math.min(15/ip.width,15/ip.height), bw=ip.width*k, bh=ip.height*k; doc.addImage(S.config.brasao,/jpeg/.test(S.config.brasao.slice(0,20))?'JPEG':'PNG',22-bw/2,12-bh/2,bw,bh); x0=36; }catch(e){} }
     doc.setTextColor(255); doc.setFont('helvetica','bold'); doc.setFontSize(14); doc.text(T(titulo),x0,11);
     doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(205,224,231); doc.text(T((S.config.orgao||'')+(S.config.setor?'  |  '+S.config.setor:'')+'  |  '+sub),x0,18);
     doc.text(T('Emitido em '+emit),W-14,11,{align:'right'}); };
@@ -1627,7 +1694,7 @@ function pdfBase(titulo,sub,orient){
 /* ===================== Tela: Relatórios ===================== */
 function rpInit(){
   if(S.rp) return; const k=S.mes||mk(hoje());
-  S.rp={per:'mes',mes:k,ano:+k.slice(0,4),de:k+'-01',ate:fimMes(k),resp:'',sit:'',dias:cfg().diasParado};
+  S.rp={per:'mes',mes:k,ano:+k.slice(0,4),de:k+'-01',ate:fimMes(k),resp:'',sit:'',mod:'',sec:'',dias:cfg().diasParado};
 }
 function fimMes(k){ const [y,m]=k.split('-').map(Number); return k+'-'+pad(new Date(y,m,0).getDate()); }
 function rpPeriodo(){
@@ -1637,9 +1704,13 @@ function rpPeriodo(){
   const de=r.de<=r.ate?r.de:r.ate, ate=r.de<=r.ate?r.ate:r.de; return {de,ate,nome:br(de)+' a '+br(ate)};
 }
 function diasEntre(a,b){ if(!a||!b) return null; return Math.round((new Date(b+'T12:00')-new Date(a+'T12:00'))/864e5); }
+function selModFiltro(id,v){ return '<select id="'+id+'" aria-label="Modalidade"><option value="">Todas as modalidades</option><option value="_"'+(v==='_'?' selected':'')+'>Sem modalidade</option>'+[...new Set(MODS.map(x=>x.g))].map(g=>'<optgroup label="'+h(g)+'">'+MODS.filter(x=>x.g===g).map(x=>'<option value="'+x.k+'"'+(v===x.k?' selected':'')+'>'+h(x.l)+'</option>').join('')+'</optgroup>').join('')+'</select>'; }
+function selSecFiltro(id,v){ const L=secSugestoes(); return '<select id="'+id+'" aria-label="Secretaria"><option value="">Todas as secretarias</option><option value="_"'+(v==='_'?' selected':'')+'>Sem secretaria</option>'+L.map(x=>'<option value="'+h(x)+'"'+(v===x?' selected':'')+'>'+h(x)+'</option>').join('')+'</select>'; }
+function porSecretaria(L){ const o={}; L.forEach(p=>{ const k=p.secretaria||'_'; const x=o[k]=o[k]||{k,nome:k==='_'?'Sem secretaria informada':k,t:0,concluido:0,aberto:0,cancelado:0,contratos:0}; x.t++; const s=p.situacao||'andamento'; if(s==='concluido') x.concluido++; else if(s==='cancelado') x.cancelado++; else x.aberto++; if(p.contrato) x.contratos++; }); return Object.values(o).sort((a,b)=>(a.k==='_')-(b.k==='_')||b.t-a.t||a.nome.localeCompare(b.nome,'pt-BR')); }
+function porModalidade(L){ const o={}; L.forEach(p=>{ const k=p.modalidade&&MODK[p.modalidade]?p.modalidade+(MODK[p.modalidade].forma&&p.forma?'|'+p.forma:''):'_'; const x=o[k]=o[k]||{k,nome:k==='_'?'Sem modalidade informada':modNome(p),t:0,concluido:0,aberto:0,cancelado:0,contratos:0}; x.t++; const s=p.situacao||'andamento'; if(s==='concluido') x.concluido++; else if(s==='cancelado') x.cancelado++; else x.aberto++; if(p.contrato) x.contratos++; }); return Object.values(o).sort((a,b)=>(a.k==='_')-(b.k==='_')||b.t-a.t); }
 function rpDados(){
   const P=rpPeriodo(), r=S.rp;
-  const L=lista().filter(p=>p.data&&p.data>=P.de&&p.data<=P.ate&&(!r.resp||(r.resp==='_'?!p.responsavel:p.responsavel===r.resp))&&(!r.sit||(p.situacao||'andamento')===r.sit))
+  const L=lista().filter(p=>p.data&&p.data>=P.de&&p.data<=P.ate&&(!r.resp||(r.resp==='_'?!p.responsavel:p.responsavel===r.resp))&&(!r.sit||(p.situacao||'andamento')===r.sit)&&(!r.mod||(r.mod==='_'?!p.modalidade:p.modalidade===r.mod))&&(!r.sec||(r.sec==='_'?!p.secretaria:p.secretaria===r.sec)))
     .sort((a,b)=>(a.data||'').localeCompare(b.data||'')||(+a.numero||0)-(+b.numero||0));
   const k=contar(L);
   const tempos=L.filter(p=>p.situacao==='concluido'&&p.conclusao).map(p=>diasEntre(p.data,p.conclusao)).filter(n=>n!=null&&n>=0);
@@ -1649,7 +1720,7 @@ function rpDados(){
     .sort((a,b)=>b.t-a.t||(a.id==='_'?1:b.id==='_'?-1:a.nome.localeCompare(b.nome,'pt-BR')));
   const hj=hoje(); const parados=lista().filter(p=>(p.situacao==='andamento'||p.situacao==='aguardando'||!p.situacao)&&p.data&&diasEntre(p.data,hj)>r.dias&&(!r.resp||(r.resp==='_'?!p.responsavel:p.responsavel===r.resp)))
     .map(p=>({...p,idade:diasEntre(p.data,hj)})).sort((a,b)=>b.idade-a.idade);
-  return {P,L,k,media,linhas,parados};
+  return {P,L,k,media,linhas,parados,mods:porModalidade(L),secs:porSecretaria(L)};
 }
 const fmtDias=n=>n==null?'—':(n<1?'menos de 1 dia':(Math.round(n*10)/10).toLocaleString('pt-BR')+(Math.round(n)===1?' dia':' dias'));
 function vRelatorios(){
@@ -1666,9 +1737,11 @@ function vRelatorios(){
       (r.per==='ano'?'<label>Ano<select id="rp_ano">'+anos.map(a=>'<option'+(a===r.ano?' selected':'')+'>'+a+'</option>').join('')+'</select></label>':'')+
       (r.per==='intervalo'?'<label>De<input type="date" id="rp_de" value="'+r.de+'"></label><label>Até<input type="date" id="rp_ate" value="'+r.ate+'"></label>':'')+
       '<label>Responsável<select id="rp_resp"><option value="">Todos</option><option value="_"'+(r.resp==='_'?' selected':'')+'>Sem responsável</option>'+respList(true).map(x=>'<option value="'+x.id+'"'+(r.resp===x.id?' selected':'')+'>'+h(x.nome)+'</option>').join('')+'</select></label>'+
+      '<label>Secretaria'+selSecFiltro('rp_sec',r.sec)+'</label>'+
+      '<label>Modalidade'+selModFiltro('rp_mod',r.mod)+'</label>'+
       '<label>Situação<select id="rp_sit"><option value="">Todas</option>'+SITK.map(s=>'<option value="'+s+'"'+(r.sit===s?' selected':'')+'>'+SIT[s].l+'</option>').join('')+'</select></label>'+
     '</div>'+
-    '<div class="rp-actions"><span class="rp-sum"><b>'+h(P.nome)+'</b> · '+D.L.length+' processo'+(D.L.length===1?'':'s')+(r.resp?' · '+h(r.resp==='_'?'sem responsável':respNome(r.resp)):'')+(r.sit?' · '+SIT[r.sit].l.toLowerCase():'')+'</span><span class="spacer"></span>'+
+    '<div class="rp-actions"><span class="rp-sum"><b>'+h(P.nome)+'</b> · '+D.L.length+' processo'+(D.L.length===1?'':'s')+(r.resp?' · '+h(r.resp==='_'?'sem responsável':respNome(r.resp)):'')+(r.sec?' · '+h(r.sec==='_'?'sem secretaria':r.sec):'')+(r.mod?' · '+h(r.mod==='_'?'sem modalidade':MODK[r.mod].l.toLowerCase()):'')+(r.sit?' · '+SIT[r.sit].l.toLowerCase():'')+'</span><span class="spacer"></span>'+
       '<button class="btn primary" data-act="rp-pdf"'+(D.L.length?'':' disabled')+'>'+I.pdf+'PDF completo</button>'+
       '<button class="btn ghost" data-act="rp-pdf-ind"'+(D.linhas.some(x=>x.id!=='_')?'':' disabled')+'>'+I.pdf+'PDF individual por responsável</button>'+
       '<button class="btn ghost" data-act="rp-csv"'+(D.L.length?'':' disabled')+'>'+I.down+'Planilha (CSV)</button></div>'+
@@ -1685,9 +1758,15 @@ function vRelatorios(){
     (D.parados.length?'<div class="rp-par">'+D.parados.slice(0,12).map(p=>'<button class="rp-pi" data-open="'+p.id+'"><span class="nproc">'+h(p.numero)+'</span><span class="rp-pt"><b>'+h(p.interessado)+'</b><small>'+h(respNome(p.responsavel)||'Sem responsável')+' · '+SIT[p.situacao||'andamento'].l+'</small></span><span class="rp-age">'+p.idade+' dias</span></button>').join('')+(D.parados.length>12?'<div class="muted" style="padding:8px 16px;font-size:12px">e mais '+(D.parados.length-12)+' no PDF</div>':'')+'</div>'
       :'<div class="empty">Nenhum processo em aberto há mais de '+r.dias+' dias.</div>')+
   '</section>'+
+  '<section class="card span-6"><div class="card-h"><span class="badge-ico" style="--c:var(--ok)">'+I.predio+'</span><h2>Por secretaria</h2></div>'+
+    (D.secs.length?'<div class="tbl-wrap"><table class="rp-tab"><thead><tr><th>Secretaria</th><th class="num">Processos</th><th class="num">Concluídos</th><th class="num">Em aberto</th><th class="num">Contratos</th></tr></thead><tbody>'+D.secs.map(x=>'<tr><td>'+h(x.nome)+'</td><td class="num"><b>'+x.t+'</b></td><td class="num">'+x.concluido+'</td><td class="num">'+x.aberto+'</td><td class="num">'+x.contratos+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">Nenhum processo no período com esses filtros.</div>')+
+  '</section>'+
+  '<section class="card span-6"><div class="card-h"><span class="badge-ico" style="--c:#3a5fb5">'+I.escudo+'</span><h2>Por modalidade</h2><small class="muted">Lei 14.133/2021</small></div>'+
+    (D.mods.length?'<div class="tbl-wrap"><table class="rp-tab"><thead><tr><th>Modalidade</th><th class="num">Processos</th><th class="num">Concluídos</th><th class="num">Em aberto</th><th class="num">Contratos</th></tr></thead><tbody>'+D.mods.map(x=>'<tr><td>'+h(x.nome)+'</td><td class="num"><b>'+x.t+'</b></td><td class="num">'+x.concluido+'</td><td class="num">'+x.aberto+'</td><td class="num">'+x.contratos+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">Nenhum processo no período com esses filtros.</div>')+
+  '</section>'+
   '<section class="card span-12"><div class="card-h"><span class="badge-ico" style="--c:var(--accent)">'+I.todos+'</span><h2>Processos do relatório</h2><span class="count">'+D.L.length+'</span></div>'+
     (D.L.length?'<div class="tbl-wrap"><table><thead><tr><th>Processo</th><th>Data</th><th>Interessado</th><th>Responsável</th><th>Situação</th><th>Conclusão</th></tr></thead><tbody>'+
-      D.L.map(p=>'<tr class="click" data-open="'+p.id+'" tabindex="0"><td><span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td>'+h(p.interessado)+(p.assunto?'<span class="sub">'+h(p.assunto)+'</span>':'')+'</td><td>'+h(respNome(p.responsavel)||'—')+'</td><td>'+pill(p.situacao||'andamento')+'</td><td class="mono">'+(p.conclusao?br(p.conclusao)+(p.situacao==='concluido'?'<span class="sub">'+fmtDias(diasEntre(p.data,p.conclusao))+'</span>':''):'—')+'</td></tr>').join('')+
+      D.L.map(p=>'<tr class="click" data-open="'+p.id+'" tabindex="0"><td><span class="nproc">'+h(p.numero)+'</span></td><td class="mono">'+br(p.data)+'</td><td class="td-int">'+h(p.interessado)+(p.assunto?'<span class="sub obj" title="'+h(p.assunto)+'">'+h(p.assunto)+'</span>':'')+tagsProc(p)+'</td><td>'+h(respNome(p.responsavel)||'—')+'</td><td>'+pill(p.situacao||'andamento')+'</td><td class="mono">'+(p.conclusao?br(p.conclusao)+(p.situacao==='concluido'?'<span class="sub">'+fmtDias(diasEntre(p.data,p.conclusao))+'</span>':''):'—')+'</td></tr>').join('')+
       '</tbody></table></div>':'<div class="empty">Nenhum processo no período com esses filtros.</div>')+
   '</section></div>'+
   '<section class="card"><div class="card-h"><span class="badge-ico" style="--c:var(--info)">'+I.historico+'</span><h2>Relatórios prontos</h2></div><div class="card-b rp-prontos">'+
@@ -1696,7 +1775,7 @@ function vRelatorios(){
     '<button class="rp-pr" data-act="csv-ano"><span class="pdf-i">'+I.down+'</span><span><b>Planilha do ano</b><small>Todos os processos de '+S.ano+'</small></span></button>'+
   '</div></section>';
 }
-function rpSubtitulo(D){ const r=S.rp; return D.P.nome+(r.resp?' · '+(r.resp==='_'?'Sem responsável':respNome(r.resp)):'')+(r.sit?' · '+SIT[r.sit].l:''); }
+function rpSubtitulo(D){ const r=S.rp; return D.P.nome+(r.resp?' · '+(r.resp==='_'?'Sem responsável':respNome(r.resp)):'')+(r.sec?' · '+(r.sec==='_'?'Sem secretaria':r.sec):'')+(r.mod?' · '+(r.mod==='_'?'Sem modalidade':MODK[r.mod].l):'')+(r.sit?' · '+SIT[r.sit].l:''); }
 async function rpPdf(){
   const D=rpDados(); const Pd=pdfBase('Relatório de processos',rpSubtitulo(D),'landscape'); if(!Pd) return; const doc=Pd.doc;
   Pd.header(); let y=34;
@@ -1707,11 +1786,15 @@ async function rpPdf(){
   y+=24; y=Pd.sec(y,'Produtividade por responsável');
   y=Pd.tab(y,['Responsável','Total','Concluídos','Em aberto','Cancelados','Taxa de conclusão','Tempo médio'],D.linhas.map(x=>[x.nome,x.t,x.concluido,x.andamento+x.aguardando,x.cancelado,x.pct+'%',fmtDias(x.media)]),
     {columnStyles:{1:{halign:'center',fontStyle:'bold'},2:{halign:'center'},3:{halign:'center'},4:{halign:'center'},5:{halign:'center'},6:{halign:'center'}},foot:[['Total',D.k.total,D.k.concluido,D.k.andamento+D.k.aguardando,D.k.cancelado,pct+'%',fmtDias(D.media)]],footStyles:{fillColor:[241,245,247],textColor:[27,43,51],fontStyle:'bold',halign:'center'}});
+  if(D.secs.length){ y=Pd.sec(y,'Por secretaria');
+    y=Pd.tab(y,['Secretaria','Processos','Concluídos','Em aberto','Cancelados','Com contrato'],D.secs.map(x=>[x.nome,x.t,x.concluido,x.aberto,x.cancelado,x.contratos]),{columnStyles:{1:{halign:'center',fontStyle:'bold'},2:{halign:'center'},3:{halign:'center'},4:{halign:'center'},5:{halign:'center'}}}); }
+  if(D.mods.length){ y=Pd.sec(y,'Por modalidade (Lei 14.133/2021)');
+    y=Pd.tab(y,['Modalidade','Processos','Concluídos','Em aberto','Cancelados','Com contrato'],D.mods.map(x=>[x.nome,x.t,x.concluido,x.aberto,x.cancelado,x.contratos]),{columnStyles:{1:{halign:'center',fontStyle:'bold'},2:{halign:'center'},3:{halign:'center'},4:{halign:'center'},5:{halign:'center'}}}); }
   if(D.parados.length){ y=Pd.sec(y,'Em aberto há mais de '+S.rp.dias+' dias ('+D.parados.length+')');
     y=Pd.tab(y,['Nº','Data','Interessado','Responsável','Situação','Dias em aberto'],D.parados.map(p=>[p.numero,br(p.data),p.interessado,respNome(p.responsavel)||'-',SIT[p.situacao||'andamento'].l,p.idade]),{columnStyles:{0:{cellWidth:14,halign:'center'},1:{cellWidth:24},5:{halign:'center',fontStyle:'bold',textColor:[185,116,0]}}}); }
   y=Pd.sec(y,'Processos do período ('+D.L.length+')');
-  Pd.tab(y,['Nº','Data','Interessado','Responsável','Situação','Conclusão','Dias'],D.L.map(p=>[p.numero,br(p.data),p.interessado+(p.assunto?'\n'+p.assunto:''),respNome(p.responsavel)||'-',SIT[p.situacao||'andamento'].l,p.conclusao?br(p.conclusao):'-',p.situacao==='concluido'&&p.conclusao?diasEntre(p.data,p.conclusao):'-']),
-    {columnStyles:{0:{cellWidth:14,halign:'center',fontStyle:'bold'},1:{cellWidth:24},3:{cellWidth:45},4:{cellWidth:30},5:{cellWidth:24},6:{cellWidth:14,halign:'center'}}});
+  Pd.tab(y,['Nº','Data','Interessado','Modalidade / nº','Contrato','Responsável','Situação','Conclusão','Dias'],D.L.map(p=>[p.numero,br(p.data),p.interessado+(p.assunto?'\n'+p.assunto:'')+(p.secretaria?'\n'+p.secretaria:''),[p.numMod,modNome(p,true)].filter(Boolean).join('\n')||'-',p.contrato||'-',respNome(p.responsavel)||'-',SIT[p.situacao||'andamento'].l,p.conclusao?br(p.conclusao):'-',p.situacao==='concluido'&&p.conclusao?diasEntre(p.data,p.conclusao):'-']),
+    {columnStyles:{0:{cellWidth:12,halign:'center',fontStyle:'bold'},1:{cellWidth:21},3:{cellWidth:38},4:{cellWidth:22},5:{cellWidth:34},6:{cellWidth:28},7:{cellWidth:21},8:{cellWidth:12,halign:'center'}}});
   Pd.footer(); await salvarArquivo('relatorio-processos-'+slugP(D.P)+'.pdf',doc.output('blob'));
 }
 function slugP(P){ return (P.de===P.ate?P.de:P.de+'-a-'+P.ate); }
@@ -1721,27 +1804,29 @@ async function rpPdfInd(){
     doc.setFont('helvetica','bold'); doc.setFontSize(15); doc.setTextColor(27,43,51); doc.text(T(x.nome),14,y); const st=(S.resp[x.id]||{}).setor; if(st){ doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(93,114,126); doc.text(T(st),14,y+5.5); }
     y+=12; y=Pd.tab(y,['Total','Concluídos','Em andamento','Aguardando','Cancelados','Taxa de conclusão','Tempo médio'],[[x.t,x.concluido,x.andamento,x.aguardando,x.cancelado,x.pct+'%',fmtDias(x.media)]],{styles:{halign:'center',fontSize:9.5,font:'helvetica',cellPadding:2.6,textColor:[27,43,51],lineColor:[219,227,232],lineWidth:.2}});
     const L=D.L.filter(p=>p.responsavel===x.id); y=Pd.sec(y,'Processos ('+L.length+')');
-    Pd.tab(y,['Nº','Data','Interessado','Situação','Conclusão'],L.map(p=>[p.numero,br(p.data),p.interessado,SIT[p.situacao||'andamento'].l,p.conclusao?br(p.conclusao):'-']),{columnStyles:{0:{cellWidth:14,halign:'center',fontStyle:'bold'},1:{cellWidth:24},3:{cellWidth:30},4:{cellWidth:24}}});
+    Pd.tab(y,['Nº','Data','Interessado','Modalidade / nº','Situação','Conclusão'],L.map(p=>[p.numero,br(p.data),p.interessado+(p.secretaria?'\n'+p.secretaria:'')+(p.contrato?'\nContrato '+p.contrato:''),[p.numMod,modNome(p,true)].filter(Boolean).join('\n')||'-',SIT[p.situacao||'andamento'].l,p.conclusao?br(p.conclusao):'-']),{columnStyles:{0:{cellWidth:12,halign:'center',fontStyle:'bold'},1:{cellWidth:21},3:{cellWidth:38},4:{cellWidth:24},5:{cellWidth:21}}});
   });
   Pd.footer(); await salvarArquivo('relatorio-individual-'+slugP(D.P)+'.pdf',doc.output('blob'));
 }
 async function rpCsv(){
   const D=rpDados();
-  const rows=[['Nº','Data','Mês','Interessado','Assunto','Responsável','Situação','Conclusão','Dias até concluir','Observações']].concat(D.L.map(p=>[p.numero,br(p.data),mesNome(mk(p.data)),p.interessado,p.assunto||'',respNome(p.responsavel),SIT[p.situacao||'andamento'].l,br(p.conclusao),p.situacao==='concluido'&&p.conclusao?diasEntre(p.data,p.conclusao):'',p.obs||'']));
+  const rows=[['Nº','Data','Mês','Interessado','Assunto','Secretaria','Modalidade','Forma','Nº da modalidade','Fundamento legal','Nº do contrato','Responsável','Situação','Conclusão','Dias até concluir','Observações']].concat(D.L.map(p=>[p.numero,br(p.data),mesNome(mk(p.data)),p.interessado,p.assunto||'',p.secretaria||'',(MODK[p.modalidade]||{}).l||'',FORMAS[p.forma]||'',p.numMod||'',p.fundamento||'',p.contrato||'',respNome(p.responsavel),SIT[p.situacao||'andamento'].l,br(p.conclusao),p.situacao==='concluido'&&p.conclusao?diasEntre(p.data,p.conclusao):'',p.obs||'']));
+  rows.push([]); rows.push(['Resumo por secretaria']); rows.push(['Secretaria','Processos','Concluídos','Em aberto','Cancelados','Com contrato']); D.secs.forEach(x=>rows.push([x.nome,x.t,x.concluido,x.aberto,x.cancelado,x.contratos]));
+  rows.push([]); rows.push(['Resumo por modalidade']); rows.push(['Modalidade','Processos','Concluídos','Em aberto','Cancelados','Com contrato']); D.mods.forEach(x=>rows.push([x.nome,x.t,x.concluido,x.aberto,x.cancelado,x.contratos]));
   rows.push([]); rows.push(['Resumo por responsável']); rows.push(['Responsável','Total','Concluídos','Em aberto','Cancelados','Taxa de conclusão','Tempo médio (dias)']);
   D.linhas.forEach(x=>rows.push([x.nome,x.t,x.concluido,x.andamento+x.aguardando,x.cancelado,x.pct+'%',x.media==null?'':String(Math.round(x.media*10)/10).replace('.',',')]));
   await salvarArquivo('relatorio-processos-'+slugP(D.P)+'.csv',new Blob([csv(rows)],{type:'text/csv;charset=utf-8'}));
 }
 
 async function pdfMes(){
-  const L=lista().filter(p=>mk(p.data)===S.mes).sort((a,b)=>(+a.numero||0)-(+b.numero||0)); const P=pdfBase('Processos de '+mesNome(S.mes),'Relatório mensal'); if(!P) return;
+  const L=lista().filter(p=>mk(p.data)===S.mes).sort((a,b)=>(+a.numero||0)-(+b.numero||0)); const P=pdfBase('Processos de '+mesNome(S.mes).replace(/^./,c=>c.toLowerCase()),'Relatório mensal'); if(!P) return;
   P.header(); let y=P.sec(34,'Resumo por responsável');
   const por={}; L.forEach(p=>{ const r=p.responsavel||'_'; por[r]=por[r]||{t:0,andamento:0,aguardando:0,concluido:0,cancelado:0}; por[r].t++; por[r][p.situacao||'andamento']++; });
   const k=contar(L);
   y=P.tab(y,['Responsável','Total','Concluídos','Em andamento','Aguardando','Cancelados'],Object.entries(por).sort((a,b)=>b[1].t-a[1].t).map(([r,v])=>[r==='_'?'Sem responsável':respNome(r),v.t,v.concluido,v.andamento,v.aguardando,v.cancelado]),
     {columnStyles:{1:{halign:'center',fontStyle:'bold'},2:{halign:'center'},3:{halign:'center'},4:{halign:'center'},5:{halign:'center'}},foot:[['Total',k.total,k.concluido,k.andamento,k.aguardando,k.cancelado]],footStyles:{fillColor:[241,245,247],textColor:[27,43,51],fontStyle:'bold',halign:'center'}});
   y=P.sec(y,'Processos do mês ('+L.length+')');
-  P.tab(y,['Nº','Data','Interessado','Responsável','Situação'],L.map(p=>[p.numero,br(p.data),p.interessado+(p.assunto?'\n'+p.assunto:''),respNome(p.responsavel)||'-',SIT[p.situacao||'andamento'].l]),{columnStyles:{0:{cellWidth:14,halign:'center',fontStyle:'bold'},1:{cellWidth:22},3:{cellWidth:38},4:{cellWidth:28}}});
+  P.tab(y,['Nº','Data','Interessado','Modalidade / nº','Responsável','Situação'],L.map(p=>[p.numero,br(p.data),p.interessado+(p.assunto?'\n'+p.assunto:'')+(p.secretaria?'\n'+p.secretaria:'')+(p.contrato?'\nContrato '+p.contrato:''),[p.numMod,modNome(p,true)].filter(Boolean).join('\n')||'-',respNome(p.responsavel)||'-',SIT[p.situacao||'andamento'].l]),{columnStyles:{0:{cellWidth:12,halign:'center',fontStyle:'bold'},1:{cellWidth:20},3:{cellWidth:36},4:{cellWidth:34},5:{cellWidth:24}}});
   P.footer(); await salvarArquivo('processos-'+S.mes+'.pdf',P.doc.output('blob'));
 }
 function matrizAno(Y){ const L=lista().filter(p=>(p.data||'').startsWith(Y+'-')); const ids=[...new Set(L.map(p=>p.responsavel||'_'))]; const m={}; ids.forEach(i=>m[i]=Array(12).fill(0)); L.forEach(p=>m[p.responsavel||'_'][+p.data.slice(5,7)-1]++); return {L,m,ids:ids.sort((a,b)=>a==='_'?1:b==='_'?-1:respNome(a).localeCompare(respNome(b),'pt-BR'))}; }
@@ -1755,7 +1840,7 @@ async function pdfAno(){
 }
 async function csvAno(){
   const Y=S.ano; const L=lista().filter(p=>(p.data||'').startsWith(Y+'-')).sort((a,b)=>(a.data||'').localeCompare(b.data||'')||(+a.numero)-(+b.numero));
-  const rows=[['Mês','Nº','Data','Interessado','Assunto','Responsável','Situação','Conclusão','Observações']].concat(L.map(p=>[mesNome(mk(p.data)),p.numero,br(p.data),p.interessado,p.assunto||'',respNome(p.responsavel),SIT[p.situacao||'andamento'].l,br(p.conclusao),p.obs||'']));
+  const rows=[['Mês','Nº','Data','Interessado','Assunto','Secretaria','Modalidade','Forma','Nº da modalidade','Fundamento legal','Nº do contrato','Responsável','Situação','Conclusão','Observações']].concat(L.map(p=>[mesNome(mk(p.data)),p.numero,br(p.data),p.interessado,p.assunto||'',p.secretaria||'',(MODK[p.modalidade]||{}).l||'',FORMAS[p.forma]||'',p.numMod||'',p.fundamento||'',p.contrato||'',respNome(p.responsavel),SIT[p.situacao||'andamento'].l,br(p.conclusao),p.obs||'']));
   await salvarArquivo('processos-'+Y+'.csv',new Blob([csv(rows)],{type:'text/csv;charset=utf-8'}));
 }
 
@@ -1779,6 +1864,9 @@ document.addEventListener('click',async ev=>{
   if(a==='cfg-tema'){ const k=t.dataset.t; try{ if(k==='auto') localStorage.removeItem('controle-processos-tema'); else localStorage.setItem('controle-processos-tema',k); }catch(e){} if(k==='auto') document.documentElement.removeAttribute('data-theme'); aplicarTema(k==='auto'?null:k); render(); return; }
   if(a==='cfg-senha'){ t.disabled=true; try{ await FB.auth.reset(S.me.email); toast('Link enviado para '+S.me.email+'. Veja também o spam.'); }catch(e){ toast(fbErro(e)); } t.disabled=false; return; }
   if(a==='cfg-backup'){ t.disabled=true; try{ await baixarBackup(); }catch(e){ toast('Não foi possível gerar o backup.'); } t.disabled=false; return; }
+  if(a==='sec-add'){ const i=document.getElementById('secNova'); const n=(i&&i.value||'').trim().replace(/\s+/g,' '); if(!n){ toast('Digite o nome da secretaria.'); i&&i.focus(); return; } const L=secretarias(); if(L.some(x=>x.toLowerCase()===n.toLowerCase())){ toast('Essa secretaria já está na lista.'); return; } await salvarSecretarias([...L,n],n+' adicionada.'); const j=document.getElementById('secNova'); if(j) j.focus(); return; }
+  if(a==='sec-rm'){ const L=secretarias(); const x=L[+t.dataset.i]; await salvarSecretarias(L.filter((_,k)=>k!==+t.dataset.i),x+' removida da lista.'); return; }
+  if(a==='sec-up'){ const L=[...secretarias()]; const i=+t.dataset.i; if(i>0){ [L[i-1],L[i]]=[L[i],L[i-1]]; await salvarSecretarias(L); } return; }
   if(a==='perm-padrao'){ if(!isAdmin()) return negar(); const c={...S.config}; delete c.permissoes; try{ await put('config','geral',c); render(); toast('Permissões voltaram ao padrão.'); }catch(e){} return; }
   if(a==='cfg-restore-no'){ S.cfgImport=null; render(); return; }
   if(a==='cfg-restore-ok'){ await restaurarBackup(t); return; }
@@ -1840,7 +1928,10 @@ document.addEventListener('change',ev=>{
   if(el.dataset.setresp){ setCampo(el.dataset.setresp,'responsavel',el.value); return; }
   if(el.dataset.setsit){ setCampo(el.dataset.setsit,'situacao',el.value); return; }
   if(el.name==='p_sit'){ coletarProc(); renderModal(); return; }
+  if(el.id==='p_modalidade'||el.id==='p_forma'){ const M=S.modal, antes={...M.d}; coletarProc(); const p=M.d; const m=MODK[p.modalidade]; if(el.id==='p_modalidade'){ p.forma=m&&m.forma&&m.k!=='dispensa'?(antes.forma||'eletronica'):''; } const velho=prefixoMod(antes.modalidade,antes.forma), novo=prefixoMod(p.modalidade,p.forma); const n=(p.numMod||'').trim(); if(!n) p.numMod=novo?novo+' - ':''; else if(velho&&n.startsWith(velho)&&novo) p.numMod=novo+n.slice(velho.length); else if(velho&&(n===velho+' -'||n===velho+' - '.trim())) p.numMod=novo?novo+' - ':''; renderModal(); const i=document.getElementById(el.id); if(i) i.focus(); return; }
   if(el.id==='fr'){ S.f.r=el.value; render(); }
+  if(el.id==='fmod'){ S.f.mod=el.value; render(); return; }
+  if(el.id==='fsec'){ S.f.sec=el.value; render(); return; }
   if(el.id==='mbYear'){ S.mes=el.value+'-'+S.mes.slice(5); lembrarMes(); render(); }
   if(el.name==='rp_per'){ S.rp.per=el.value; render(); return; }
   if(el.id&&el.id.startsWith('rp_')){ const k=el.id.slice(3); S.rp[k]=(k==='ano'||k==='dias')?+el.value:el.value; render(); return; }
@@ -1858,7 +1949,7 @@ document.addEventListener('submit',ev=>{ if(ev.target.id!=='lgForm') return; ev.
 document.addEventListener('dragleave',ev=>{ const z=ev.target.closest&&ev.target.closest('#dz'); if(z&&!z.contains(ev.relatedTarget)) z.classList.remove('over'); });
 document.addEventListener('drop',ev=>{ const z=ev.target.closest&&ev.target.closest('#dz'); if(z){ ev.preventDefault(); z.classList.remove('over'); adicionarArquivos(ev.dataTransfer.files); } else if(S.modal&&S.modal.kind==='proc') ev.preventDefault(); });
 document.addEventListener('dragover',ev=>{ if(S.modal&&S.modal.kind==='proc') ev.preventDefault(); });
-document.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&ev.target.id==='dz'){ ev.preventDefault(); document.getElementById('anxIn').click(); return; } if(ev.key==='Escape'&&document.querySelector('.viewer')){ document.querySelector('.viewer').remove(); return; } if(ev.key==='Escape'&&S.modal) fechar(); if(ev.key==='Enter'&&ev.target.matches('tr[data-open]')) abrirProc(ev.target.dataset.open); });
+document.addEventListener('keydown',ev=>{ if(ev.key==='Enter'&&ev.target.id==='secNova'){ ev.preventDefault(); const b=document.querySelector('[data-act="sec-add"]'); if(b) b.click(); return; } if(ev.key==='Enter'&&ev.target.id==='dz'){ ev.preventDefault(); document.getElementById('anxIn').click(); return; } if(ev.key==='Escape'&&document.querySelector('.viewer')){ document.querySelector('.viewer').remove(); return; } if(ev.key==='Escape'&&S.modal) fechar(); if(ev.key==='Enter'&&ev.target.matches('tr[data-open]')) abrirProc(ev.target.dataset.open); });
 document.getElementById('searchForm').addEventListener('submit',ev=>{ ev.preventDefault(); S.tq=document.getElementById('q').value; go('todos'); });
 function lembrarMes(){ try{ localStorage.setItem('controle-processos-mes',S.mes); }catch(e){} S.ano=+S.mes.slice(0,4); }
 
